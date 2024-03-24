@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ bed }}{% endblock %}
+
+{% block body %}
+    <h2>{{ bed }}</h2>
+
+    {% if comments|length > 0 %}
+        {% for comment in comments %}
+            {% if comment.photofilename %}
+                <img src="{{ asset('uploads/photos/' ~ comment.photofilename) }}" style="max-width: 200px" />
+            {% endif %}
+
+            <h4>{{ comment.author }}</h4>
+            <small>
+                {{ comment.createdAt|format_datetime('medium', 'short') }}
+            </small>
+
+            <p>{{ comment.text }}</p>
+        {% endfor %}
+        {% if previous >= 0 %}
+            <a href="{{ path('app_bed_show', { id: bed.id, offset: previous }) }}">{{ "Previous"|trans }}</a>
+        {% endif %}
+        {% if next < comments|length %}
+            <a href="{{ path('app_bed_show', { id: bed.id, offset: next }) }}">{{ "Next"|trans }}</a>
+        {% endif %}
+    {% else %}
+        <div>{{ "No comments have been posted yet for this bed."|trans }}</div>
+    {% endif %}
+
+{% endblock %}
+
+

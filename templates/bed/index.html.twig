@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List of beds{% endblock %}
+
+{% block body %}
+    <ul>
+        {% for bed in beds %}
+            <li><a href="{{ path('app_bed_show', { id: bed.id }) }}">{{ bed }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
