@@ -24,7 +24,7 @@ class Plant
 
     #[ORM\ManyToOne(inversedBy: 'plants')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Bed $bed = null;
+    private ?Location $location = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $text = null;
@@ -91,14 +91,14 @@ class Plant
         return $this;
     }
 
-    public function getBed(): ?Bed
+    public function getLocation(): ?Location
     {
-        return $this->bed;
+        return $this->location;
     }
 
-    public function setBed(?Bed $bed): self
+    public function setLocation(?Location $location): self
     {
-        $this->bed = $bed;
+        $this->location = $location;
 
         return $this;
     }

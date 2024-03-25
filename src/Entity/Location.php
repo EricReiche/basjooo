@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\BedRepository;
+use App\Repository\LocationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: BedRepository::class)]
-class Bed
+#[ORM\Entity(repositoryClass: LocationRepository::class)]
+class Location
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,13 +24,13 @@ class Bed
     #[ORM\Column(length: 255)]
     private ?string $icon = null;
 
-    #[ORM\OneToMany(mappedBy: 'bed', targetEntity: Comment::class)]
+    #[ORM\OneToMany(mappedBy: 'location', targetEntity: Comment::class)]
     private Collection $comments;
 
-    #[ORM\OneToMany(mappedBy: 'bed', targetEntity: Plant::class)]
+    #[ORM\OneToMany(mappedBy: 'location', targetEntity: Plant::class)]
     private Collection $plants;
 
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'beds')]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'locations')]
     private Collection $users;
 
     public function __construct()
@@ -98,7 +98,7 @@ class Bed
     {
         if (!$this->comments->contains($comment)) {
             $this->comments->add($comment);
-            $comment->setBed($this);
+            $comment->setLo($this);
         }
 
         return $this;
@@ -108,8 +108,8 @@ class Bed
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getBed() === $this) {
-                $comment->setBed(null);
+            if ($comment->getLocation() === $this) {
+                $comment->setLocation(null);
             }
         }
 
@@ -128,7 +128,7 @@ class Bed
     {
         if (!$this->plants->contains($plant)) {
             $this->plants->add($plant);
-            $plant->setBed($this);
+            $plant->setLocation($this);
         }
 
         return $this;
@@ -138,8 +138,8 @@ class Bed
     {
         if ($this->plants->removeElement($plant)) {
             // set the owning side to null (unless already changed)
-            if ($plant->setBed() === $this) {
-                $plant->setBed(null);
+            if ($plant->setLocation() === $this) {
+                $plant->setLocation(null);
             }
         }
 

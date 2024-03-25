@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Comment;
-use App\Entity\Bed;
+use App\Entity\Location;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -42,10 +42,10 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
-    public function getCommentPaginator(Bed $bed, int $offset): Paginator
+    public function getCommentPaginator(Location $bed, int $offset): Paginator
     {
         $query = $this->createQueryBuilder('c')
-            ->andWhere('c.bed = :bed')
+            ->andWhere('c.location = :bed')
             ->setParameter('bed', $bed)
             ->orderBy('c.createdAt', 'DESC')
             ->setMaxResults(self::PAGINATOR_PER_PAGE)

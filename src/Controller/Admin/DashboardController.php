@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Comment;
 use App\Entity\Plant;
-use App\Entity\Bed;
+use App\Entity\Location;
 use App\Entity\Species;
 use App\Entity\User;
 
@@ -50,7 +50,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Comments', 'fas fa-list', Comment::class);
         yield MenuItem::linkToCrud('Plants', 'fas fa-list', Plant::class);
-        yield MenuItem::linkToCrud('Beds', 'fas fa-list', Bed::class);
+        yield MenuItem::linkToCrud('Beds', 'fas fa-list', Location::class);
         yield MenuItem::linkToCrud('Species', 'fas fa-list', Species::class);
         yield MenuItem::linkToCrud('Users', 'fas fa-list', User::class);
     }

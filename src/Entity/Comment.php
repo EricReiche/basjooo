@@ -27,7 +27,7 @@ class Comment
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
-    private ?Bed $bed = null;
+    private ?Location $location = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     private ?Plant $plant = null;
@@ -88,14 +88,14 @@ class Comment
         return $this;
     }
 
-    public function getBed(): ?Bed
+    public function getLocation(): ?Location
     {
-        return $this->bed;
+        return $this->location;
     }
 
-    public function setBed(?Bed $bed): self
+    public function setLocation(?Location $location): self
     {
-        $this->bed = $bed;
+        $this->location = $location;
 
         return $this;
     }

@@ -33,14 +33,14 @@ class CommentCrudController extends AbstractCrudController
     {
         return $filters
             ->add(EntityFilter::new('plant'))
-            ->add(EntityFilter::new('bed'));
+            ->add(EntityFilter::new('location'));
     }
 
 
     public function configureFields(string $pageName): iterable
     {
         yield AssociationField::new('plant')->onlyWhenCreating();
-        yield AssociationField::new('bed')->onlyWhenCreating();
+        yield AssociationField::new('location')->onlyWhenCreating();
         yield TextField::new('author');
         yield TextField::new('photoFilename');
         yield EmailField::new('email');

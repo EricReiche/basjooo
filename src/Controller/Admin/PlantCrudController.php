@@ -30,7 +30,7 @@ class PlantCrudController extends AbstractCrudController
     public function configureFilters(Filters $filters): Filters
     {
         return $filters
-            ->add(EntityFilter::new('bed'))
+            ->add(EntityFilter::new('location'))
             ->add(EntityFilter::new('species'));
     }
 
@@ -38,7 +38,7 @@ class PlantCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new('name');
-        yield AssociationField::new('bed');
+        yield AssociationField::new('location');
         yield TextField::new('text');
         yield AssociationField::new('species');
     }

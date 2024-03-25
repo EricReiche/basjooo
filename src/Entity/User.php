@@ -22,7 +22,7 @@ class User
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: Bed::class, mappedBy: 'users')]
+    #[ORM\ManyToMany(targetEntity: Location::class, mappedBy: 'users')]
     private Collection $beds;
 
     public function __construct()
@@ -64,14 +64,14 @@ class User
     }
 
     /**
-     * @return Collection<int, Bed>
+     * @return Collection<int, Location>
      */
     public function getBeds(): Collection
     {
         return $this->beds;
     }
 
-    public function addBed(Bed $bed): self
+    public function addBed(Location $bed): self
     {
         if (!$this->beds->contains($bed)) {
             $this->beds->add($bed);
@@ -81,7 +81,7 @@ class User
         return $this;
     }
 
-    public function removeBed(Bed $bed): self
+    public function removeBed(Location $bed): self
     {
         if ($this->beds->removeElement($bed)) {
             $bed->removeUser($this);
